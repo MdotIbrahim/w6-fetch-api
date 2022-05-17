@@ -23,7 +23,7 @@ const App = () => {
         }
       }
       fetchData()
-    }, [])
+    }, [randomPersonArr])
 
 
 
