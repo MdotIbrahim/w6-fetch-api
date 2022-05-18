@@ -6,26 +6,24 @@ let show = false
 const App = () => {
     const [randomPersonArr, setRandomPersonArr] = useState([])
 
+    const fetchData =  async () => {
+      try {
+      const response = await fetch("https://randomuser.me/api/?results=20")
+      const data = await response.json()
+      if (!response.ok){
+        throw new Error(response.statusText)
+      }
+      console.log(response)
+      setRandomPersonArr(data.results) // add object to the array so can use map function. - edit: or in this new case just take the array from the object if it exists...
+      console.log(randomPersonArr)
+      } catch (err) {
+        console.log(err)
+      }
+    }
 
     useEffect (() => {
-      const fetchData = async () => {
-        try {
-        const response = await fetch("https://randomuser.me/api/?results=20")
-        const data = await response.json()
-        if (!response.ok){
-          throw new Error(response.statusText)
-        }
-        console.log(response)
-        setRandomPersonArr(data.results) // add object to the array so can use map function. - edit: or in this new case just take the array from the object if it exists...
-        console.log(randomPersonArr)
-        } catch (err) {
-          console.log(err)
-        }
-      }
-      fetchData()
-    }, [randomPersonArr])
-
-
+      fetchData()// eslint-disable-next-line
+    }, [])
 
     const [showModal, setShowModal] = useState(false)
     // useEffect (() => {
